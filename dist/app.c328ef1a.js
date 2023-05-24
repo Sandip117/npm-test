@@ -2976,52 +2976,52 @@ module.exports = [{
   "User": "cl_usr_1",
   "SeriesInstanceUID": "bf7c8ff050133ec637c3",
   "StudyInstanceUID": "418fb2f2dd3285527a9f",
-  "PatientID": "9457504c68d7654b4f3c"
+  "PatientID": "ddcf2dae666914b629dcbb1697be00"
 }, {
   "User": "cl_usr_2",
   "SeriesInstanceUID": "bf7c8ff0501",
   "StudyInstanceUID": "418fb2f2dd3",
-  "PatientID": "9457504c68d"
+  "PatientID": "ddcf2dae666914b629dcbb1697be0"
 }, {
   "User": "cl_usr_3",
   "SeriesInstanceUID": "bf7c8ff05013",
   "StudyInstanceUID": "418fb2f2dd32",
-  "PatientID": "9457504c68d7"
+  "PatientID": "ddcf2dae666914b629dcbb1697be"
 }, {
   "User": "cl_usr_4",
   "SeriesInstanceUID": "bf7c8ff050133",
   "StudyInstanceUID": "418fb2f2dd328",
-  "PatientID": "9457504c68d76"
+  "PatientID": "ddcf2dae666914b629dcbb1697b"
 }, {
   "User": "cl_usr_5",
   "SeriesInstanceUID": "bf7c8ff050133e",
   "StudyInstanceUID": "418fb2f2dd3285",
-  "PatientID": "9457504c68d765"
+  "PatientID": "ddcf2dae666914b629dcbb1697"
 }, {
   "User": "cl_usr_6",
   "SeriesInstanceUID": "bf7c8ff050133ec",
   "StudyInstanceUID": "418fb2f2dd32855",
-  "PatientID": "9457504c68d7654"
+  "PatientID": "ddcf2dae666914b629dcbb169"
 }, {
   "User": "cl_usr_7",
   "SeriesInstanceUID": "bf7c8ff050133ec6",
   "StudyInstanceUID": "418fb2f2dd328552",
-  "PatientID": "9457504c68d7654b"
+  "PatientID": "ddcf2dae666914b629dcbb16"
 }, {
   "User": "cl_usr_8",
   "SeriesInstanceUID": "bf7c8ff050133ec63",
   "StudyInstanceUID": "418fb2f2dd3285527",
-  "PatientID": "9457504c68d7654b4"
+  "PatientID": "ddcf2dae666914b629dcbb1"
 }, {
   "User": "cl_usr_9",
   "SeriesInstanceUID": "bf7c8ff050133ec637",
   "StudyInstanceUID": "418fb2f2dd3285527a",
-  "PatientID": "9457504c68d7654b4f"
+  "PatientID": "ddcf2dae666914b629dcbb"
 }, {
   "User": "cl_usr_10",
   "SeriesInstanceUID": "bf7c8ff050133ec637c",
   "StudyInstanceUID": "418fb2f2dd3285527a9",
-  "PatientID": "9457504c68d7654b4f3"
+  "PatientID": "ddcf2dae666914b629dcb"
 }];
 },{}],"app.js":[function(require,module,exports) {
 "use strict";
@@ -3113,35 +3113,15 @@ function _postData() {
         switch (_context3.prev = _context3.next) {
           case 0:
             bodyObj = {
-              "PFDCMservice": "PFDCMLOCAL",
-              "PACSservice": "orthanc",
-              "PACSdirective": {
-                "PatientID": data.PatientID
+              "imageMeta": {
+                "StudyInstanceUID": data.StudyInstanceUID,
+                "SeriesInstanceUID": data.SeriesInstanceUID
               },
-              "dblogbasepath": "/home/dicom/log",
-              "thenArgs": {
-                "db": "/home/dicom/log",
-                "swift": "local",
-                "swiftServicesPACS": "orthanc",
-                "swiftPackEachDICOM": true,
-                "CUBE": "local",
-                "parseAllFilesWithSubStr": "dcm"
-              },
-              "feedArgs": {
-                "FeedName": "%SeriesInstanceUID",
-                "User": data.User,
-                "Pipeline": "",
-                "nodeArgs": {
-                  "PluginName": "pl-pfdorun",
-                  "Version": "",
-                  "Params": {},
-                  "PassUserCreds": false
-                }
-              }
+              "analyzeFunction": "dylld"
             };
             _context3.prev = 1;
             _context3.next = 4;
-            return fetch("http://localhost:8050/workflow/do/", {
+            return fetch("http://localhost:33333/api/v1/analyze/?test=true", {
               method: 'POST',
               headers: {
                 'Content-Type': "application/json",
@@ -3203,7 +3183,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46425" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46093" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

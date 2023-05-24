@@ -33,35 +33,15 @@ async function postData(data) {
 
   
   let bodyObj = {
-  "PFDCMservice": "PFDCMLOCAL",
-  "PACSservice": "orthanc",
-  "PACSdirective": {
-    "PatientID": data.PatientID,
+  "imageMeta": {
+    "StudyInstanceUID": data.StudyInstanceUID,
+    "SeriesInstanceUID": data.SeriesInstanceUID
     },
-  "dblogbasepath": "/home/dicom/log",
-  "thenArgs": {
-    "db": "/home/dicom/log",
-    "swift": "local",
-    "swiftServicesPACS": "orthanc",
-    "swiftPackEachDICOM": true,
-    "CUBE": "local",
-    "parseAllFilesWithSubStr": "dcm"
-  },
-  "feedArgs": {
-    "FeedName": "%SeriesInstanceUID",
-    "User": data.User,
-    "Pipeline": "",
-    "nodeArgs": {
-      "PluginName": "pl-pfdorun",
-      "Version": "",
-      "Params": {},
-      "PassUserCreds": false
-    }
-  }
+  "analyzeFunction": "dylld",
 };
 
   try {
-    const response = await fetch("http://localhost:8050/workflow/do/",{
+    const response = await fetch("http://localhost:33333/api/v1/analyze/?test=true",{
       method: 'POST',
       headers: {
          'Content-Type': "application/json",
