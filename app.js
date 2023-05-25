@@ -14,6 +14,7 @@ async function renderDataInTheTable(todos) {
                     cell.innerText = value;
                     newRow.appendChild(cell);
                 })
+                let label = document.createElement("Label")
                 let button = document.createElement("a")
                 let link = document.createTextNode("LLD")
                 button.appendChild(link)
@@ -22,9 +23,16 @@ async function renderDataInTheTable(todos) {
                 button.data = todo
                 button.addEventListener("click",async function(todo)
                 {
-                    await postData(todo.target.data)
+                   var response = await postData(todo.target.data)
+                   if (response.data){
+                       label.innerHTML = response.State
+                       console.log(response)
+                   }
                 });
+                
+                          
                 newRow.appendChild(button);
+                newRow.appendChild(label);
                 mytable.appendChild(newRow);
             });
         }
@@ -50,6 +58,7 @@ async function postData(data) {
       body : JSON.stringify(bodyObj),
       });
     console.log("Request successful!");
+    return response
   } catch (error) {
     if (error.response) {
       console.log(error.reponse.status);
@@ -57,5 +66,6 @@ async function postData(data) {
       console.log(error.message);
     }
   }
+  
 }
 

@@ -3060,6 +3060,7 @@ function _renderDataInTheTable() {
                 cell.innerText = value;
                 newRow.appendChild(cell);
               });
+              var label = document.createElement("Label");
               var button = document.createElement("a");
               var link = document.createTextNode("LLD");
               button.appendChild(link);
@@ -3068,6 +3069,7 @@ function _renderDataInTheTable() {
               button.data = todo;
               button.addEventListener("click", /*#__PURE__*/function () {
                 var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(todo) {
+                  var response;
                   return regeneratorRuntime.wrap(function _callee$(_context) {
                     while (1) {
                       switch (_context.prev = _context.next) {
@@ -3076,6 +3078,14 @@ function _renderDataInTheTable() {
                           return postData(todo.target.data);
 
                         case 2:
+                          response = _context.sent;
+
+                          if (response.data) {
+                            label.innerHTML = response.State;
+                            console.log(response);
+                          }
+
+                        case 4:
                         case "end":
                           return _context.stop();
                       }
@@ -3088,6 +3098,7 @@ function _renderDataInTheTable() {
                 };
               }());
               newRow.appendChild(button);
+              newRow.appendChild(label);
               mytable.appendChild(newRow);
             });
 
@@ -3133,11 +3144,10 @@ function _postData() {
           case 4:
             response = _context3.sent;
             console.log("Request successful!");
-            _context3.next = 11;
-            break;
+            return _context3.abrupt("return", response);
 
-          case 8:
-            _context3.prev = 8;
+          case 9:
+            _context3.prev = 9;
             _context3.t0 = _context3["catch"](1);
 
             if (_context3.t0.response) {
@@ -3146,12 +3156,12 @@ function _postData() {
               console.log(_context3.t0.message);
             }
 
-          case 11:
+          case 12:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[1, 8]]);
+    }, _callee3, null, [[1, 9]]);
   }));
   return _postData.apply(this, arguments);
 }
@@ -3183,7 +3193,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46093" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36905" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
