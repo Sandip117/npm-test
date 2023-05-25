@@ -24,10 +24,7 @@ async function renderDataInTheTable(todos) {
                 button.addEventListener("click",async function(todo)
                 {
                    var response = await postData(todo.target.data)
-                   if (response.data){
-                       label.innerHTML = response.State
-                       console.log(response)
-                   }
+                   label.innerHTML = response.State
                 });
                 
                           
@@ -58,7 +55,7 @@ async function postData(data) {
       body : JSON.stringify(bodyObj),
       });
     console.log("Request successful!");
-    return response
+    return response.json()
   } catch (error) {
     if (error.response) {
       console.log(error.reponse.status);

@@ -3079,11 +3079,7 @@ function _renderDataInTheTable() {
 
                         case 2:
                           response = _context.sent;
-
-                          if (response.data) {
-                            label.innerHTML = response.State;
-                            console.log(response);
-                          }
+                          label.innerHTML = response.State;
 
                         case 4:
                         case "end":
@@ -3144,7 +3140,7 @@ function _postData() {
           case 4:
             response = _context3.sent;
             console.log("Request successful!");
-            return _context3.abrupt("return", response);
+            return _context3.abrupt("return", response.json());
 
           case 9:
             _context3.prev = 9;
@@ -3193,7 +3189,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36905" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36989" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
