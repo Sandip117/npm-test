@@ -1,0 +1,6 @@
+# container stuff
+.config/
+.npm/
+.cache/
+.yarnrc
+/node_modules
