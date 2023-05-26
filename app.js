@@ -3,6 +3,22 @@ import axios from 'axios'
 
 let json = require('/list.json');
 console.log(json, 'the json obj');
+regenerateJSON(json);
+function regenerateJSON(json) {
+    Array.prototype.forEach.call(json, row => {
+        row['SeriesInstanceUID'] = randomstring(30)
+        row['StudyInstanceUID'] = randomstring(30)
+        row['PatientID'] = randomstring(10)
+    });
+}
+
+function randomstring(length) {
+    var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    var result = '';
+    for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+    return result;
+}
+
 renderDataInTheTable(json);
 async function renderDataInTheTable(todos) {
             const mytable = document.getElementById("html-data-table");
@@ -24,7 +40,7 @@ async function renderDataInTheTable(todos) {
                 button.addEventListener("click",async function(todo)
                 {
                    var response = await postData(todo.target.data)
-                   label.innerHTML = response.State
+                   label.innerHTML = response.State +"_" +response.Progress
                 });
                 
                           

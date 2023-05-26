@@ -3039,6 +3039,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var json = require('/list.json');
 
 console.log(json, 'the json obj');
+regenerateJSON(json);
+
+function regenerateJSON(json) {
+  Array.prototype.forEach.call(json, function (row) {
+    row['SeriesInstanceUID'] = randomstring(30);
+    row['StudyInstanceUID'] = randomstring(30);
+    row['PatientID'] = randomstring(10);
+  });
+}
+
+function randomstring(length) {
+  var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var result = '';
+
+  for (var i = length; i > 0; --i) {
+    result += chars[Math.floor(Math.random() * chars.length)];
+  }
+
+  return result;
+}
+
 renderDataInTheTable(json);
 
 function renderDataInTheTable(_x) {
@@ -3079,7 +3100,7 @@ function _renderDataInTheTable() {
 
                         case 2:
                           response = _context.sent;
-                          label.innerHTML = response.State;
+                          label.innerHTML = response.State + "_" + response.Progress;
 
                         case 4:
                         case "end":
@@ -3189,7 +3210,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36989" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40359" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
